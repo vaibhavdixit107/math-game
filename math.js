@@ -11,46 +11,50 @@ var state = {
 
 var DOM = {
   body: document.getElementsByTagName('body')[0],
-  correctBtn: document.getElementById('correct-btn'),
-  incorrectBtn: document.getElementById('incorrect-btn'),
+  rightBtn: document.getElementById('right-btn'),
+  wrongBtn: document.getElementById('wrong-btn'),
   numbers: document.getElementById('numbers'),
-  result: document.getElementById('result'),
-  score: document.getElementById('score-display'),
-  gameOverDisplay: document.getElementById('game-over-display'),
-  gameOverMsg: document.getElementById('game-over-message'),
+  output: document.getElementById('output'),
+  score: document.getElementById('score'),
+  gameOver: document.getElementById('game-over'),
+  gameOverMsg: document.getElementById('game-over-msg'),
   playAgainBtn: document.getElementById('play-again-btn'),
-  lastScore: document.getElementById('last-score'),
+  currentScore: document.getElementById('current-score'),
   bestScore: document.getElementById('best-score'),
   timer: document.getElementById('timer')
 }
 
 
-document.addEventListener('DOMContentLoaded',function runFreakingMathClone () {
-  DOM.correctBtn.addEventListener('click', checkIfCorrect)
-  DOM.incorrectBtn.addEventListener('click', checkIfIncorrect)
-  DOM.playAgainBtn.addEventListener('click', refreshPage)
+document.addEventListener('DOMContentLoaded',function() {
+  DOM.rightBtn.addEventListener('click', right)
+  DOM.wrongBtn.addEventListener('click', wrong)
+  DOM.playAgainBtn.addEventListener('click', pageRefresh)
   // Set a random background color
+  //need to check
   DOM.body.style['background-color'] = getRandomColor()
-  generateNewNumbers()
+  generateRandomNumbers()
 })
 
-// --------------------------------------------------
-function refreshPage () {
+// reloading the page
+function pageRefresh () {
   window.location.reload()
 }
 
-function generateNewNumbers () {
+//generating the new random numbers
+function generateRandomNumbers () {
   state.a = Math.floor((Math.random()* 10) + 1);
   state.b = Math.floor((Math.random()* 10) + 1);
   state.ans = Math.floor((Math.random()* 10) + 1);
   state.score = state.score + 1
-  refreshUI()
+  contentRefresh()
 }
-// --------------------------------------------------
-function refreshUI () {
+
+
+// Reloading the page with the new number
+function contentRefresh () {
   DOM.score.textContent = state.score
   DOM.numbers.textContent = state.a + ' + ' + state.b
-  DOM.result.textContent = (function () {
+  DOM.output.textContent = (function () {
     state.sum = state.a + state.b
     if (state.ans === true) {
       return '= ' + state.sum
@@ -69,72 +73,76 @@ function refreshUI () {
   })()
 }
 
-// To check if the result is correct
-function checkIfCorrect () {
-  //var sum = state.a + state.b
+// To check if the output is correct
+function right () {
   if (state.ans === state.sum) {
-    generateNewNumbers()
-    refreshTimer()
+    generateRandomNumbers()
+    timeRefresh()
   } else {
-    endGame('Game Over')
+    gameOver('Game Over')
   }
 }
 
-function checkIfIncorrect () {
-  //var sum = state.a + state.b
+// Checking with the wrong output
+function wrong () {
+  
   if (state.ans !== state.sum) {
-    generateNewNumbers()
-    refreshTimer()
+    generateRandomNumbers()
+    timeRefresh()
 
   } else {
-    endGame('Game Over')
+    gameOver('Game Over')
   }
 }
-// --------------------------------------------------
-function refreshTimer () {
-  if (state.timeOutId) {        // timer running
+
+
+// Refreshing the timer for the new problem
+function timeRefresh () {
+  if (state.timeOutId) {
     DOM.timer.className = ''
     window.clearTimeout(state.timeOutId)
   }
-  startTimer()
+  timerStart()
 }
 
-function startTimer () {
+
+//Restart the timer
+function timerStart () {
   window.setTimeout(function () {
     DOM.timer.className = 'active'
   }, 100)
   state.timeOutId = window.setTimeout(function () {
     if (!state.gameOver) {
-      endGame('Time Out')
+      gameOver('Time Out')
     }
   }, state.timeLimit)
 }
 
-// --------------------------------------------------
-function endGame (reason) {
+// Game over
+function gameOver (reason) {
   state.gameOver = true
   // Display end game message
   DOM.gameOverMsg.textContent = reason
-  DOM.lastScore.textContent = state.score
+  DOM.currentScore.textContent = state.score
   DOM.bestScore.textContent = getHighestScore()
-  DOM.gameOverDisplay.className = 'on-screen'
+  DOM.gameOver.className = 'on-screen'
   // Disable buttons
-  DOM.correctBtn.disabled = true
-  DOM.incorrectBtn.disabled = true
+  DOM.rightBtn.disabled = true
+  DOM.wrongBtn.disabled = true
 }
 
 //storing the value in local storage
-function getHighestScore () {
-  var highestScore = window.localStorage.getItem('highest-score')
-  if (highestScore) {
-    if (highestScore < state.score) {
-      window.localStorage.setItem('highest-score', state.score)
+function getHighScore () {
+  var highScore = window.localStorage.getItem('high-score')
+  if (highScore) {
+    if (highScore < state.score) {
+      window.localStorage.setItem('high-score', state.score)
       return state.score
     } else {
-      return highestScore
+      return highScore
     }
   } else {
-    window.localStorage.setItem('highest-score', state.score)
+    window.localStorage.setItem('high-score', state.score)
     return state.score
   }
 }

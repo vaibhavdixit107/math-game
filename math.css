@@ -20,7 +20,7 @@ body {
     padding-top: 60px;
 }
 
-/* >>> TIMER */
+
 #timer {
     height: 10px;
     position: absolute;
@@ -45,11 +45,7 @@ body {
     to {width: 0;}
 }
 
-
-/* <<< TIMER */
-
-/* >>> GAME OVER DISPLAY */
-#game-over-display {
+#game-over {
     position: absolute;
     padding: 20px;
     width: 200px;
@@ -60,16 +56,16 @@ body {
     border-radius: 5px;
 }
 
-#game-over-display h3 {
+#game-over h3 {
     margin-top: 0;
     margin-bottom: 15px;
 }
 
-#game-over-display.off-screen {
+#game-over.off-screen {
     top: -200px;
 }
 
-#game-over-display.on-screen {
+#game-over.on-screen {
     top: 100px;
 }
 
@@ -80,9 +76,9 @@ body {
     margin-top: 15px;
     background-color: transparent;
 }
-/* <<< GAME OVER DISPLAY */
 
-#score-display {
+
+#score {
     font-size: 35px;
     font-weight: bold;
     position: absolute;
@@ -98,7 +94,7 @@ h1 {
     text-align: center;
 }
 
-/* BUTTONS */
+
 .btn {
     width: 136px;
     height: 136px;
@@ -109,18 +105,19 @@ h1 {
     background-color: transparent;
 }
 
-#correct-btn {
-    background-image: url('https://s3-us-west-2.amazonaws.com/vretta-interview-assets/checkmark.png');
+#right-btn {
+    background-image: url('https://pixabay.com/en/check-correct-mark-right-choice-40319');
+    /*background-image: './images/right.png'*/
 }
-
-#correct-btn:hover {
+/*
+#right-btn:hover {
     background-image: url('https://s3-us-west-2.amazonaws.com/vretta-interview-assets/checkmark_onhover.png');
-}
+}*/
 
-#incorrect-btn {
+#wrong-btn {
     background-image: url('https://s3-us-west-2.amazonaws.com/vretta-interview-assets/xmark.png');
 }
 
-#incorrect-btn:hover {
+#wrong-btn:hover {
     background-image: url('https://s3-us-west-2.amazonaws.com/vretta-interview-assets/xmark_onhover.png');
 }
