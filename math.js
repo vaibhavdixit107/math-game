@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded',function() {
   //need to check
   DOM.body.style['background-color'] = getRandomColor()
   generateRandomNumbers()
+  timeRefresh()
 })
 
 // reloading the page
@@ -124,7 +125,7 @@ function gameOver (reason) {
   // Display end game message
   DOM.gameOverMsg.textContent = reason
   DOM.currentScore.textContent = state.score
-  DOM.bestScore.textContent = getHighestScore()
+  DOM.bestScore.textContent = getHighScore()
   DOM.gameOver.className = 'on-screen'
   // Disable buttons
   DOM.rightBtn.disabled = true

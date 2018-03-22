@@ -106,13 +106,13 @@ h1 {
 }
 
 #right-btn {
-    background-image: url('https://pixabay.com/en/check-correct-mark-right-choice-40319');
+    background-image: url('https://s3-us-west-2.amazonaws.com/vretta-interview-assets/checkmark.png');
     /*background-image: './images/right.png'*/
 }
-/*
+
 #right-btn:hover {
     background-image: url('https://s3-us-west-2.amazonaws.com/vretta-interview-assets/checkmark_onhover.png');
-}*/
+}
 
 #wrong-btn {
     background-image: url('https://s3-us-west-2.amazonaws.com/vretta-interview-assets/xmark.png');
