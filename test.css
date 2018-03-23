@@ -1,0 +1,30 @@
+#name    {
+        position: absolute;
+        height: auto;
+        left: 25%;
+        top: 0;
+        width: auto;
+        border: 13px solid red;
+        border-radius: 26px;
+        padding: 28px;
+    }
+
+    .jumbotron {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    color: inherit;
+    background-color: #eee;
+    /* width: 121%; */
+    height: 100%;
+}
+
+#play{
+
+    position: absolute;
+    height: auto;
+    left: 40%;
+    top: 70%;
+    width: auto;
+ 
+}
